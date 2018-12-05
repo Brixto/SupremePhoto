@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SwipePage } from './swipe/swipe.page';
+import { PhotoLibrary } from '@ionic-native/photo-library';
 
 @NgModule({
   declarations: [AppComponent, SwipePage],
@@ -17,6 +18,7 @@ import { SwipePage } from './swipe/swipe.page';
   providers: [
     StatusBar,
     SplashScreen,
+    PhotoLibrary,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
