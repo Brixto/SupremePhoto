@@ -1,1 +1,12 @@
-<h1>Swipe Page</h1>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>swipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>Swipe</h1>
+  <ion-card on-swipe-right="swipeRight()" on-swipe-left="swipeLeft()">
+        <img [src]="imageUrl">
+    </ion-card>
+</ion-content>

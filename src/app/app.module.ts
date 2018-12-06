@@ -8,11 +8,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SwipePage } from './swipe/swipe.page';
 import { PhotoLibrary } from '@ionic-native/photo-library';
 
 @NgModule({
-  declarations: [AppComponent, SwipePage],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
