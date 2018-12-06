@@ -1,12 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>swipe</ion-title>
+    <ion-title>Swipe</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>Swipe</h1>
-  <ion-card on-swipe-right="swipeRight()" on-swipe-left="swipeLeft()">
-        <img [src]="imageUrl">
+  <ion-card (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)">
+    <ion-item>
+      Swiped
+    </ion-item>
+  </ion-card>
+
+  <div swingStack #myswing1 [stackConfig]="stackConfig">
+    <ion-card swingCard #swingCards>
+      <ion-item>
+        CARD
+      </ion-item>
     </ion-card>
+  </div>
+  <!--<ion-slides (ionSlideDrag)="swipeRight()">
+    <ion-slide>
+      <div>TEST2</div>
+    </ion-slide>
+  </ion-slides>-->
 </ion-content>
