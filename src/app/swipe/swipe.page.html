@@ -5,19 +5,12 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)">
-    <ion-item>
-      Swiped
-    </ion-item>
+  <ion-card [ngClass]="{'swipe-right': isSwipedRight, 'swipe-left': isSwipedLeft}" (swipeleft)="swipeLeft($event)" (swiperight)="swipeRight($event)">
+      <ion-card-content>
+        Swiped
+      </ion-card-content>
   </ion-card>
 
-  <div swingStack #myswing1 [stackConfig]="stackConfig">
-    <ion-card swingCard #swingCards>
-      <ion-item>
-        CARD
-      </ion-item>
-    </ion-card>
-  </div>
   <!--<ion-slides (ionSlideDrag)="swipeRight()">
     <ion-slide>
       <div>TEST2</div>
