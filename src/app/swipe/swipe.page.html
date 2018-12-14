@@ -6,6 +6,8 @@
 
 aaaa{{finished}}
 
+<ion-button (click)="logs()">Click me</ion-button>
+
 <ion-content padding>
   <ion-card *ngFor="let img of list" [ngClass]="{'swipe-right': img.swipedRight, 'swipe-left': img.swipedLeft}" (swipeleft)="swipeLeft(img)"
     (swiperight)="swipeRight(img)">

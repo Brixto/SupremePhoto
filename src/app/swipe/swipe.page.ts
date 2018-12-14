@@ -16,7 +16,14 @@ export class SwipePage implements OnInit {
 
   constructor(private photoLibrary: PhotoLibrary, private domsanitizer: DomSanitizer) {
     console.log('Swipe Page');
+  }
 
+  ngOnInit() {
+
+  }
+
+  public logs() {
+    console.log('log this please');
     let options: GetLibraryOptions =
     {
       thumbnailWidth: 512,
@@ -29,7 +36,7 @@ export class SwipePage implements OnInit {
       this.photoLibrary.getLibrary(options).subscribe({
         next: library => {
           library.forEach(libraryItem => {
-            let imageUrl = domsanitizer.bypassSecurityTrustUrl(libraryItem.thumbnailURL);
+            let imageUrl = this.domsanitizer.bypassSecurityTrustUrl(libraryItem.thumbnailURL);
             this.list.push({ url: imageUrl, swipedLeft: false, swipedRight: false });
           });
           console.log('finished');
@@ -40,9 +47,6 @@ export class SwipePage implements OnInit {
         },
       });
     });
-  }
-
-  ngOnInit() {
   }
 
   public swipeRight(e) {

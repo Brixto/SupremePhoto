@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ios": "ionic cordova run ios -- --buildFlag=\"-UseModernBuildSystem=0\""
+    "ios": "ionic cordova run ios -lc -- --buildFlag=\"-UseModernBuildSystem=0\""
   },
   "private": true,
   "dependencies": {
