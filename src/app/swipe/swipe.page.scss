@@ -1,7 +1,28 @@
 .swipe-left{
     background-color: red;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .swipe-right{
     background-color: green;
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+}
+
+ion-card{
+    position: absolute;
+    width: 1073px;
+    background-color: white;
+    height: 90%;
+}
+
+ion-content{
+    position: relative;
+}
+
+img{
+    pointer-events: none;
 }

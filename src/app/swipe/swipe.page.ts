@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { PhotoLibrary } from '@ionic-native/photo-library';
+import { PhotoLibrary, GetLibraryOptions } from '@ionic-native/photo-library';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Img } from '@ionic/angular';
 
 @Component({
   selector: 'app-swipe',
@@ -9,37 +10,46 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class SwipePage implements OnInit {
 
-  public imageUrl: SafeUrl = '';
-  public isSwipedRight = false;
-  public isSwipedLeft = false;
+  public list = [];
+  public lista = [];
+  public finished = '';
 
   constructor(private photoLibrary: PhotoLibrary, private domsanitizer: DomSanitizer) {
-    // console.log('Swipe Page');
-    // this.photoLibrary.requestAuthorization().then(() => {
+    console.log('Swipe Page');
 
-    //     this.photoLibrary.getLibrary().subscribe(next => {
-    //         console.log('aa', next);
-    //         next.forEach(libraryItem => {
-    //             console.log(libraryItem.id);
-    //             console.log(libraryItem.photoURL);
-    //             this.imageUrl = domsanitizer.bypassSecurityTrustUrl(libraryItem.photoURL);
-    //         });
-    //     });
-    // });
+    let options: GetLibraryOptions =
+    {
+      thumbnailWidth: 512,
+      thumbnailHeight: 384,
+      quality: 0.8,
+      includeAlbumData: false,
+    };
+
+    this.photoLibrary.requestAuthorization().then(() => {
+      this.photoLibrary.getLibrary(options).subscribe({
+        next: library => {
+          library.forEach(libraryItem => {
+            let imageUrl = domsanitizer.bypassSecurityTrustUrl(libraryItem.thumbnailURL);
+            this.list.push({ url: imageUrl, swipedLeft: false, swipedRight: false });
+          });
+          console.log('finished');
+          this.finished = 'yes';
+        },
+        error: err => {
+          console.log('error loading library');
+        },
+      });
+    });
   }
 
   ngOnInit() {
   }
 
   public swipeRight(e) {
-    this.isSwipedRight = true;
-    this.isSwipedLeft = false;
-    console.log('swipe right');
+    e.swipedRight = true;
   }
 
-  public swipeLeft() {
-    this.isSwipedLeft = true;
-    this.isSwipedRight = false;
-    console.log('swipe left');
+  public swipeLeft(e) {
+    e.swipedLeft = true;
   }
 }
