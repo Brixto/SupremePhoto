@@ -11,7 +11,6 @@ import { Img } from '@ionic/angular';
 export class SwipePage {
 
     public list: any[] = [];
-    public finished = '';
 
     constructor(
         private photoLibrary: PhotoLibrary,
@@ -29,7 +28,6 @@ export class SwipePage {
                         this.list.push({ url: imageUrl, swipedLeft: false, swipedRight: false });
                     });
                     console.log('finished');
-                    this.finished = 'yes';
                 },
                 error: err => {
                     console.log('error loading library');
