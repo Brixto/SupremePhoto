@@ -4,56 +4,45 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Img } from '@ionic/angular';
 
 @Component({
-  selector: 'app-swipe',
-  templateUrl: './swipe.page.html',
-  styleUrls: ['./swipe.page.scss'],
+    selector: 'app-swipe',
+    templateUrl: './swipe.page.html',
+    styleUrls: ['./swipe.page.scss'],
 })
-export class SwipePage implements OnInit {
+export class SwipePage {
 
-  public list = [];
-  public lista = [];
-  public finished = '';
+    public list: any[] = [];
+    public finished = '';
 
-  constructor(private photoLibrary: PhotoLibrary, private domsanitizer: DomSanitizer) {
-    console.log('Swipe Page');
-  }
+    constructor(
+        private photoLibrary: PhotoLibrary,
+        private domsanitizer: DomSanitizer) {
+    }
 
-  ngOnInit() {
+    public logs() {
+        console.log('log this please');
 
-  }
+        this.photoLibrary.requestAuthorization().then(() => {
+            this.photoLibrary.getLibrary().subscribe({
+                next: library => {
+                    library.forEach(libraryItem => {
+                        const imageUrl = this.domsanitizer.bypassSecurityTrustStyle(`url(${libraryItem.photoURL})`);
+                        this.list.push({ url: imageUrl, swipedLeft: false, swipedRight: false });
+                    });
+                    console.log('finished');
+                    this.finished = 'yes';
+                },
+                error: err => {
+                    console.log('error loading library');
+                },
+            });
+        });
+    }
 
-  public logs() {
-    console.log('log this please');
-    let options: GetLibraryOptions =
-    {
-      thumbnailWidth: 512,
-      thumbnailHeight: 384,
-      quality: 0.8,
-      includeAlbumData: false,
-    };
+    public swipeRight(e) {
+        e.swipedRight = true;
+    }
 
-    this.photoLibrary.requestAuthorization().then(() => {
-      this.photoLibrary.getLibrary(options).subscribe({
-        next: library => {
-          library.forEach(libraryItem => {
-            let imageUrl = this.domsanitizer.bypassSecurityTrustUrl(libraryItem.thumbnailURL);
-            this.list.push({ url: imageUrl, swipedLeft: false, swipedRight: false });
-          });
-          console.log('finished');
-          this.finished = 'yes';
-        },
-        error: err => {
-          console.log('error loading library');
-        },
-      });
-    });
-  }
-
-  public swipeRight(e) {
-    e.swipedRight = true;
-  }
-
-  public swipeLeft(e) {
-    e.swipedLeft = true;
-  }
+    public swipeLeft(e) {
+        e.swipedLeft = true;
+    }
 }

@@ -8,17 +8,10 @@ aaaa{{finished}}
 
 <ion-button (click)="logs()">Click me</ion-button>
 
-<ion-content padding>
-  <ion-card *ngFor="let img of list" [ngClass]="{'swipe-right': img.swipedRight, 'swipe-left': img.swipedLeft}" (swipeleft)="swipeLeft(img)"
+<ion-content>
+  <div class="card" *ngFor="let img of list" [ngClass]="{'swipe-right': img.swipedRight, 'swipe-left': img.swipedLeft}" (swipeleft)="swipeLeft(img)"
     (swiperight)="swipeRight(img)">
-    <ion-card-content>
-        <img [src]="img.url">
-    </ion-card-content>
-  </ion-card>
-
-  <!--<ion-slides (ionSlideDrag)="swipeRight()">
-    <ion-slide>
-      <div>TEST2</div>
-    </ion-slide>
-  </ion-slides>-->
+    <div class="image" [style.background-image]="img.url">
+    </div>
+  </div>
 </ion-content>
