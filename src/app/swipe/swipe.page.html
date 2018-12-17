@@ -1,14 +1,15 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>Swipe2</ion-title>
+        <ion-button (click)="logs()">Click me</ion-button>
     </ion-toolbar>
 </ion-header>
 
-<ion-button (click)="logs()">Click me</ion-button>
-
 <ion-content>
-    <div class="card" *ngFor="let img of list" [ngClass]="{'swipe-right': img.swipedRight, 'swipe-left': img.swipedLeft}" (swipeleft)="swipeLeft(img)"
-        (swiperight)="swipeRight(img)">
-        <div class="image" [style.background-image]="img.url"></div>
+    <div class="stack">
+        <div class="card" *ngFor="let img of list" [ngClass]="{'swipe-right': img.swipedRight, 'swipe-left': img.swipedLeft}" (swipeleft)="swipeLeft(img)"
+            (swiperight)="swipeRight(img)">
+            <div class="image" [style.background-image]="img.url"></div>
+        </div>
     </div>
 </ion-content>
